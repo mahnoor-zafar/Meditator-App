@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "553123422998",
+    "project_id": "medi-app-14177",
+    "storage_bucket": "medi-app-14177.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:553123422998:android:458843ed2f21156f02e637",
+        "android_client_info": {
+          "package_name": "com.example.meditator_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVS8BUswrtlOm62tQ8FjQOkha8bp643Rs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
