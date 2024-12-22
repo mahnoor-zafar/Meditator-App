@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class TimerScreen extends StatefulWidget {
@@ -10,28 +9,8 @@ class TimerScreen extends StatefulWidget {
 }
 
 class _TimerScreenState extends State<TimerScreen> {
-  int _seconds = 60;
-  Timer? _timer;
   int _selectedIndex = 2;  // Timer screen is selected in the bottom nav
   final ValueNotifier<int> _notifier = ValueNotifier<int>(2);
-
-  void _startTimer() {
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      if (_seconds > 0) {
-        setState(() {
-          _seconds--;
-        });
-      } else {
-        _timer?.cancel();
-      }
-    });
-  }
-
-  @override
-  void dispose() {
-    _timer?.cancel();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,19 +19,12 @@ class _TimerScreenState extends State<TimerScreen> {
         title: const Text('Meditation Timer'),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              '$_seconds seconds',
-              style: const TextStyle(fontSize: 48, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: _startTimer,
-              child: const Text('Start Timer'),
-            ),
-          ],
+        child: Text(
+          'To be implemented', // Display the message in the center
+          style: const TextStyle(
+            fontSize: 24,
+            color: Colors.black,
+          ),
         ),
       ),
       bottomNavigationBar: ValueListenableBuilder<int>(
@@ -74,7 +46,6 @@ class _TimerScreenState extends State<TimerScreen> {
               switch (index) {
                 case 0:
                   Navigator.pushNamed(context, '/home');
-                // Navigate to HomeScreen (already on this screen)
                   break;
                 case 1:
                   Navigator.pushNamed(context, '/meditation');
@@ -99,7 +70,7 @@ class _TimerScreenState extends State<TimerScreen> {
     return BottomNavigationBarItem(
       icon: AnimatedScale(
         scale: _selectedIndex == index ? 1.2 : 1.0, // Scale the icon when selected
-        duration: Duration(milliseconds: 200), // Duration of the animation
+        duration: const Duration(milliseconds: 200), // Duration of the animation
         child: Icon(icon),
       ),
       label: label,

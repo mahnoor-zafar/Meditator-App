@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart'; // Import Firebase Core
+import 'package:meditator_app/screens/faq_screen.dart';
 import 'package:meditator_app/screens/home_screen.dart';
 import 'package:meditator_app/screens/login_screen.dart'; // Import the LoginScreen
 import 'package:meditator_app/screens/meditation_guide_screen.dart';
@@ -29,6 +30,7 @@ class MyApp extends StatelessWidget {
         '/meditation' : (context) => MeditationGuideScreen(),
         '/timer' : (context) => TimerScreen(),
         '/home' : (context) => HomeScreen(),
+        'FAQ' : (context) => FAQScreen(),
       },
       // Optionally handle unknown routes
       onUnknownRoute: (settings) {

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart'; // Import Firestore
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:meditator_app/screens/faq_screen.dart';
+import 'package:meditator_app/screens/feedback_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -11,8 +13,8 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  int _selectedIndex = 0;
-  final ValueNotifier<int> _notifier = ValueNotifier<int>(0);
+  int _selectedIndex = 3;
+  final ValueNotifier<int> _notifier = ValueNotifier<int>(3);
   late Future<DocumentSnapshot> _userData;
 
   @override
@@ -30,7 +32,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final user = FirebaseAuth.instance.currentUser;
 
     return Scaffold(
-      backgroundColor: const Color(0xFFFEF3DC),
+      backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -98,7 +100,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Icon(Icons.person, color: Colors.blueAccent),
+                        const Icon(Icons.person, color: Colors.black),
                         const SizedBox(width: 10),
                         Text(
                           userData['name'] ?? "Anonymous",
@@ -113,7 +115,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Icon(Icons.phone, color: Colors.blueAccent),
+                        const Icon(Icons.phone, color: Colors.black),
                         const SizedBox(width: 10),
                         Text(
                           userData['phone'] ?? "No Phone Provided",
@@ -126,7 +128,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Icon(Icons.email, color: Colors.blueAccent),
+                        const Icon(Icons.email, color: Colors.black),
                         const SizedBox(width: 10),
                         Text(
                           user?.email ?? "No Email Provided",
@@ -136,14 +138,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                     const SizedBox(height: 20),
 
-
-                    // Edit Profile Button
                     ElevatedButton.icon(
                       style: ElevatedButton.styleFrom(
                         minimumSize: const Size(double.infinity, 50),
-                        backgroundColor: Colors.blueAccent, // Use backgroundColor instead of primary
+                        backgroundColor: Colors.black54, // Use backgroundColor instead of primary
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(25),
                         ),
                       ),
                       onPressed: () {
@@ -152,34 +152,76 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           const SnackBar(content: Text('Edit Profile not implemented')),
                         );
                       },
-                      icon: const Icon(Icons.edit),
+                      icon: const Icon(Icons.edit, color: Colors.white),
                       label: const Text(
                         'Edit Profile',
-                        style: TextStyle(fontSize: 16),
+                        style: TextStyle(fontSize: 16, color: Colors.white),
                       ),
                     ),
-                    const SizedBox(height: 20),
-
-                    // Log Out Button
+                    const SizedBox(height: 10),
+                    ElevatedButton.icon(
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: const Size(double.infinity, 50), // Make the button wide
+                        backgroundColor: Colors.black54, // Set the background color
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25), // Rounded corners
+                        ),
+                      ),
+                      onPressed: () {
+                        // Navigate to FAQ Screen
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => FeedbackScreen()),
+                        );
+                      },
+                      icon: const Icon(Icons.question_answer, color: Colors.white), // Icon for FAQ
+                      label: const Text(
+                        'Feedback',
+                        style: TextStyle(fontSize: 16, color: Colors.white),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    ElevatedButton.icon(
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: const Size(double.infinity, 50), // Make the button wide
+                        backgroundColor: Colors.black54, // Set the background color
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25), // Rounded corners
+                        ),
+                      ),
+                      onPressed: () {
+                        // Navigate to FAQ Screen
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => FAQScreen()),
+                        );
+                      },
+                      icon: const Icon(Icons.question_answer, color: Colors.white), // Icon for FAQ
+                      label: const Text(
+                        'Frequently Asked Questions',
+                        style: TextStyle(fontSize: 16, color: Colors.white),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
                     ElevatedButton.icon(
                       style: ElevatedButton.styleFrom(
                         minimumSize: const Size(double.infinity, 50),
-                        backgroundColor: Colors.yellowAccent, // Use backgroundColor instead of primary
+                        backgroundColor: Colors.black54, // Use backgroundColor instead of primary
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(25),
                         ),
                       ),
                       onPressed: () async {
                         await FirebaseAuth.instance.signOut();
                         Navigator.of(context).pushReplacementNamed('/login');
                       },
-                      icon: const Icon(Icons.logout, color: Colors.black),
+                      icon: const Icon(Icons.logout, color: Colors.white),
                       label: const Text(
                         'Log Out',
-                        style: TextStyle(color: Colors.black, fontSize: 16),
+                        style: TextStyle(color: Colors.white, fontSize: 16),
                       ),
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 10),
                   ],
                 );
               },
@@ -207,6 +249,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               switch (index) {
                 case 0:
                   Navigator.pushNamed(context, '/home');
+                  // Navigate to HomeScreen (already on this screen)
                   break;
                 case 1:
                   Navigator.pushNamed(context, '/meditation');
@@ -215,7 +258,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Navigator.pushNamed(context, '/timer');
                   break;
                 case 3:
-                // Already on Profile screen
+                  Navigator.pushNamed(context, '/profile');
                   break;
               }
             },

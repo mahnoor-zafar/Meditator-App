@@ -42,31 +42,31 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFFEF3DC),  // Set the background color to white
+      backgroundColor: Colors.white,  // Set the background color to white
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             // Lottie Animation at the center of the screen
-            Lottie.asset(
-              'assets/animations/meditator.json',  // Lottie animation file
-              width: 300,
-              height: 300,
-              fit: BoxFit.fill,
+            Image.asset(
+              'assets/main1.jpg', // Replace with your asset
+              width: 400,
+              height: 400,
             ),
             SizedBox(height: 20),
             // App name at the bottom of the screen
             Padding(
               padding: const EdgeInsets.only(bottom: 30),
               child: Text(
-                'Meditator App',  // App name
+                'Meditopia',  // App name
                 style: TextStyle(
-                  fontFamily: 'HelveticaNeue-Bold.otf',
-                  fontSize: 30,
+                  fontFamily: 'Ephesis',  // Use the font family name, not the file name
+                  fontSize: 70,
                   fontWeight: FontWeight.bold,
                   color: Colors.black,  // Set text color to black
                 ),
+
               ),
             ),
           ],

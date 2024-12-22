@@ -20,11 +20,11 @@ class _MeditationGuideScreenState extends State<MeditationGuideScreen> {
       ),
       body: Center(
         child: const Text(
-          'Here are some steps for a successful meditation session:\n\n'
-              '1. Sit comfortably.\n'
-              '2. Close your eyes.\n'
-              '3. Take deep breaths.\n'
-              '4. Focus on your breathing and relax.',
+          'To be implemented', // Display the message in the center
+          style: const TextStyle(
+            fontSize: 24,
+            color: Colors.black,
+          ),
           textAlign: TextAlign.center,
         ),
       ),
@@ -49,7 +49,7 @@ class _MeditationGuideScreenState extends State<MeditationGuideScreen> {
                   Navigator.pushNamed(context, '/home');
                   break;
                 case 1:
-                  Navigator.pushNamed(context, '/meditation');
+
                   break;
                 case 2:
                   Navigator.pushNamed(context, '/timer');

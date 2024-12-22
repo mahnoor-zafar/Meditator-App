@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:meditator_app/screens/meditation_detail_screen.dart';
 import 'package:meditator_app/screens/meditation_guide_screen.dart';
 import 'package:meditator_app/screens/profile_screen.dart';
 import 'package:meditator_app/screens/timer_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_fonts/google_fonts.dart';
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -24,11 +27,11 @@ class _HomeScreenState extends State<HomeScreen> {
     _getUserName();
   }
 
-  // Fetch the user name from Firestore
   Future<void> _getUserName() async {
     User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
-      DocumentSnapshot userDoc = await FirebaseFirestore.instance.collection('users').doc(user.uid).get();
+      DocumentSnapshot userDoc =
+      await FirebaseFirestore.instance.collection('users').doc(user.uid).get();
       if (userDoc.exists) {
         setState(() {
           userName = userDoc['name'];
@@ -40,7 +43,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(16.0),
@@ -49,36 +51,43 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               // Greeting Section with User's Name
               Text(
-                userName != null ? "Morning, $userName!" : "Loading...",
+                userName != null ? "Welcome Back, $userName!" : "Loading...",
                 style: const TextStyle(
-                  fontSize: 24,
+                  fontFamily: 'Ephesis',
+                  fontSize: 30,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               const SizedBox(height: 4),
-              const Text(
-                "Elevate Your Soul with Meditation",
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.grey,
+               Text(
+                'How are you feeling today?',
+                style: GoogleFonts.redHatDisplay(
+                  fontSize: 30,            // Adjust the font size
+                    // Set the desired weight (e.g., bold)
+                  color: Colors.black,         // Set the text color
                 ),
               ),
+
               const SizedBox(height: 16),
 
               // Meditation Card
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: Colors.pink[50],
-                  borderRadius: BorderRadius.circular(12),
+                  color: Color(0xFFDBDCD7),
+                    borderRadius: BorderRadius.circular(12),
                 ),
                 child: Row(
                   children: [
-                    Image.asset(
-                      'assets/default_avatar.png', // Replace with your asset
-                      width: 100,
-                      height: 100,
+                    ClipOval(
+                      child: Image.asset(
+                        'assets/main.jpg', // Replace with your asset
+                        width: 100,
+                        height: 100,
+                        fit: BoxFit.cover, // Optional, ensures the image covers the area fully
+                      ),
                     ),
+
                     const SizedBox(width: 16),
                     Expanded(
                       child: Column(
@@ -87,6 +96,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           const Text(
                             "Ready to start meditation",
                             style: TextStyle(
+                              color: Colors.black,
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
                             ),
@@ -94,24 +104,25 @@ class _HomeScreenState extends State<HomeScreen> {
                           const SizedBox(height: 4),
                           const Text(
                             "Restore your life balance",
-                            style: TextStyle(fontSize: 14, color: Colors.grey),
+                            style: TextStyle(fontSize: 14, color: Colors.black),
                           ),
                           const SizedBox(height: 8),
                           Row(
                             children: [
-                              const Icon(Icons.timer, size: 16),
+                              const Icon(Icons.timer, size: 16, color: Colors.black45,),
                               const SizedBox(width: 4),
-                              const Text("15 mins"),
+                              const Text("15 mins" ,
+                                  style: TextStyle(color: Colors.black)),
                               const Spacer(),
                               ElevatedButton(
                                 onPressed: () {},
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.orange,
+                                  backgroundColor: Colors.black87,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(8),
                                   ),
                                 ),
-                                child: const Icon(Icons.play_arrow),
+                                child: const Icon(Icons.play_arrow, color: Colors.white,),
                               ),
                             ],
                           ),
@@ -140,7 +151,15 @@ class _HomeScreenState extends State<HomeScreen> {
                     _buildRecommendationCard(
                       title: "Basics",
                       subtitle: "17 sessions",
-                      color: Colors.red[50]!,
+                      color: Color(0xFFDBDBD9),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const MeditationDetailScreen(),
+                          ),
+                        );
+                      },
                     ),
                     _buildRecommendationCard(
                       title: "Happiness",
@@ -205,14 +224,12 @@ class _HomeScreenState extends State<HomeScreen> {
               _buildBottomNavItem(FontAwesomeIcons.bookAtlas, 'Timer', 2),
               _buildBottomNavItem(FontAwesomeIcons.userCircle, 'Profile', 3),
             ],
-            selectedItemColor: Colors.orange,
+            selectedItemColor: Colors.grey,
             unselectedItemColor: Colors.black,
             onTap: (index) {
               _notifier.value = index; // Update the selected index
-              // Handle navigation based on the index
               switch (index) {
                 case 0:
-                // Navigate to HomeScreen (already on this screen)
                   break;
                 case 1:
                   Navigator.pushNamed(context, '/meditation');
@@ -232,12 +249,14 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   BottomNavigationBarItem _buildBottomNavItem(
-      IconData icon, String label, int index,
+      IconData icon,
+      String label,
+      int index,
       ) {
     return BottomNavigationBarItem(
       icon: AnimatedScale(
-        scale: _selectedIndex == index ? 1.2 : 1.0, // Scale the icon when selected
-        duration: Duration(milliseconds: 200), // Duration of the animation
+        scale: _selectedIndex == index ? 1.2 : 1.0,
+        duration: const Duration(milliseconds: 200),
         child: Icon(icon),
       ),
       label: label,
@@ -248,33 +267,37 @@ class _HomeScreenState extends State<HomeScreen> {
     required String title,
     required String subtitle,
     required Color color,
+    VoidCallback? onTap,
   }) {
-    return Container(
-      margin: const EdgeInsets.only(right: 16),
-      width: 160,
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Icon(Icons.play_circle_fill, size: 32, color: Colors.orange),
-          const Spacer(),
-          Text(
-            title,
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        margin: const EdgeInsets.only(right: 16),
+        width: 160,
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Icon(Icons.play_circle_fill, size: 32, color: Colors.white),
+            const Spacer(),
+            Text(
+              title,
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            subtitle,
-            style: const TextStyle(fontSize: 12, color: Colors.grey),
-          ),
-        ],
+            const SizedBox(height: 4),
+            Text(
+              subtitle,
+              style: const TextStyle(fontSize: 12, color: Colors.black),
+            ),
+          ],
+        ),
       ),
     );
   }

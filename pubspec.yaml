@@ -37,6 +37,7 @@ dependencies:
   shared_preferences: ^2.3.3
   lottie: ^2.5.0
   font_awesome_flutter: ^10.8.0
+  google_fonts: ^6.2.1
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -71,6 +72,9 @@ flutter:
     - assets/animations/User.json
     - assets/animations/Home Button.json
     - assets/default_avatar.png
+    - assets/main.jpg
+    - assets/main1.jpg
+    - assets/home.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
@@ -91,15 +95,9 @@ flutter:
   #         style: italic
   #   - family: Trajan Pro
   fonts:
-    - family: HelveticaNeue
+    - family: Ephesis
       fonts:
-        - asset: assets/font/HelveticaNeue-Light.otf
-        - asset: assets/font/HelveticaNeue-Medium.otf
-          weight: 600
-        - asset: assets/font/HelveticaNeue-Bold.otf
-          weight: 700
-        - asset: assets/font/HelveticaNeue-Thin.otf
-          weight: 300
+        - asset: assets/font/Ephesis-Regular.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package

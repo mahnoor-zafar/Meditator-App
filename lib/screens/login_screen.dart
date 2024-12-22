@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart'; // Firebase Auth package
 import 'package:flutter/material.dart';
 import 'package:meditator_app/screens/home_screen.dart';
 import 'package:meditator_app/screens/signup_screen.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -20,7 +21,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: Color(0xFFFEF3DC), // Light yellow background
+        color: Colors.white, // Light yellow background
         child: Center(
           child: SingleChildScrollView(
             child: Form(
@@ -29,60 +30,88 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Login to Meditator",
+                    "Login to Meditopia",
                     style: TextStyle(
-                      fontSize: 30,
+                      fontFamily: 'Ephesis',  // Use the font family name, not the file name
+                      fontSize: 50,
                       fontWeight: FontWeight.bold,
-                      color: Colors.amber[800],
+                      color: Colors.black,  // Set text color to black
                     ),
                   ),
                   SizedBox(height: 40),
 
                   // Email Field
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 30),
+                    padding: const EdgeInsets.symmetric(horizontal: 25),
                     child: TextFormField(
                       controller: _emailController,
                       decoration: InputDecoration(
-                        labelText: "Email",
-                        hintText: "Enter your email",
-                        filled: true,
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(),
-                        prefixIcon: Icon(Icons.email, color: Colors.amber),
+                        labelText: "Email",  // Label text
+                        hintText: "Enter your email",  // Hint text when the field is empty
+                        filled: true,  // Fill the background with a color
+                        fillColor: Colors.white,  // Background color of the input field
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30.0),  // Rounded corners
+                        ),
+                        // Border for the enabled state (when the input field is not focused)
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30.0),  // Rounded corners for enabled state
+                          borderSide: BorderSide(color: Colors.black, width: 1.0),
+                        ),
+                        // Border for the focused state (when the input field is focused)
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30.0),  // Rounded corners for focused state
+                          borderSide: BorderSide(color: Colors.grey, width: 2.0),
+                        ),
+                        // Prefix icon (email icon)
+                        prefixIcon: Icon(Icons.email, color: Colors.black),
                       ),
-                      keyboardType: TextInputType.emailAddress,
+                      keyboardType: TextInputType.emailAddress,  // Specify email input type
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return "Email is required";
+                          return "Email is required";  // Error message if email is empty
                         } else if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
-                          return "Enter a valid email address";
+                          return "Enter a valid email address";  // Error message if email is invalid
                         }
                         return null;
                       },
                     ),
                   ),
+
                   SizedBox(height: 20),
 
                   // Password Field
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 30),
+                    padding: const EdgeInsets.symmetric(horizontal: 25),
                     child: TextFormField(
                       controller: _passwordController,
-                      obscureText: true,
+                      obscureText: true,  // This ensures the password is obscured (hidden)
                       decoration: InputDecoration(
-                        labelText: "Password",
-                        hintText: "Enter your password",
-                        filled: true,
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(),
-                        prefixIcon: Icon(Icons.lock, color: Colors.amber),
+                        labelText: "Password",  // Label text
+                        hintText: "Enter your password",  // Hint text shown when field is empty
+                        filled: true,  // Fill the background with color
+                        fillColor: Colors.white,  // Background color of the input field
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30.0),  // Rounded corners
+                        ),
+                        // Border for the enabled state (when the input field is not focused)
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30.0),  // Rounded corners for enabled state
+                          borderSide: BorderSide(color: Colors.black, width: 1.0),
+                        ),
+                        // Border for the focused state (when the input field is focused)
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30.0),  // Rounded corners for focused state
+                          borderSide: BorderSide(color: Colors.grey, width: 2.0),
+                        ),
+                        // Prefix icon (lock icon)
+                        prefixIcon: Icon(Icons.lock, color: Colors.black),
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return "Password is required";
+                          return "Password is required";  // Error message if password is empty
                         } else if (value.length < 6) {
-                          return "Password must be at least 6 characters long";
+                          return "Password must be at least 6 characters long";  // Error message if password is too short
                         }
                         return null;
                       },
@@ -96,16 +125,17 @@ class _LoginScreenState extends State<LoginScreen> {
                       : ElevatedButton(
                     onPressed: _login,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.amber,
+                      backgroundColor: Colors.black,
                       padding:
-                      EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                      EdgeInsets.symmetric(horizontal: 70, vertical: 15),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(40),
                       ),
                     ),
                     child: Text(
                       "Login",
-                      style: TextStyle(
+                      style: GoogleFonts.redHatDisplay(
+                        color: Colors.white,
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
@@ -121,7 +151,14 @@ class _LoginScreenState extends State<LoginScreen> {
                         MaterialPageRoute(builder: (context) => SignUpScreen()),
                       );
                     },
-                    child: Text("Don't have an account? Sign up"),
+                    child: Text(
+                      "Don't have an account? Sign up",
+                      style: GoogleFonts.redHatDisplay(  // Use the Red Hat Display font
+                        fontSize: 18,                    // Set font size
+                        fontWeight: FontWeight.w400,     // Set font weight
+                        color: Colors.black,             // Set font color
+                      ),
+                    ),
                   ),
                 ],
               ),
