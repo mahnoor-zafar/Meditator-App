@@ -15,9 +15,7 @@ class _MeditationGuideScreenState extends State<MeditationGuideScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Meditation Guide'),
-      ),
+
       body: Center(
         child: const Text(
           'To be implemented', // Display the message in the center

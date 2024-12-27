@@ -12,9 +12,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'FAQ Screen',
       theme: ThemeData(
-        // Apply Google Fonts globally to all text
         textTheme: GoogleFonts.redHatDisplayTextTheme(
-          Theme.of(context).textTheme,  // Keep existing text properties (color, size, etc.)
+          Theme.of(context).textTheme,
         ),
       ),
       home: FAQScreen(),
@@ -31,11 +30,11 @@ class FAQScreen extends StatefulWidget {
 }
 
 class _FAQScreenState extends State<FAQScreen> {
-  final ValueNotifier<int> _bottomNavNotifier = ValueNotifier<int>(0); // ValueNotifier to track BottomNavigationBar selected index
-  final ValueNotifier<int> _expandedTileNotifier = ValueNotifier<int>(-1); // ValueNotifier to track the expanded FAQ tile index
+  final ValueNotifier<int> _bottomNavNotifier = ValueNotifier<int>(0);
+  final ValueNotifier<int> _expandedTileNotifier = ValueNotifier<int>(-1);
   TextEditingController _searchController = TextEditingController();
   String _searchQuery = '';
-  int _selectedIndex = 3;  // Timer screen is selected in the bottom nav
+  int _selectedIndex = 3;
   final ValueNotifier<int> _notifier = ValueNotifier<int>(3);
 
   List<Map<String, String>> faqData = [
@@ -60,10 +59,9 @@ class _FAQScreenState extends State<FAQScreen> {
   @override
   void initState() {
     super.initState();
-    _searchController.addListener(_onSearchChanged); // Listen for changes in the search query
+    _searchController.addListener(_onSearchChanged);
   }
 
-  // Called when the search query changes
   void _onSearchChanged() {
     setState(() {
       _searchQuery = _searchController.text;
@@ -72,7 +70,7 @@ class _FAQScreenState extends State<FAQScreen> {
 
   @override
   void dispose() {
-    _searchController.removeListener(_onSearchChanged); // Clean up the listener when the widget is disposed
+    _searchController.removeListener(_onSearchChanged);
     _bottomNavNotifier.dispose();
     _expandedTileNotifier.dispose();
     super.dispose();
@@ -80,7 +78,6 @@ class _FAQScreenState extends State<FAQScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Filter the FAQ data based on the search query
     List<Map<String, String>> filteredFaqData = faqData
         .where((faq) =>
     faq['question']!.toLowerCase().contains(_searchQuery.toLowerCase()) ||
@@ -92,21 +89,20 @@ class _FAQScreenState extends State<FAQScreen> {
         title: const Text(
           "Frequently Asked Questions",
           style: TextStyle(
-            color: Colors.white,  // Set the text color to white
+            color: Colors.white,
           ),
         ),
-        backgroundColor: Colors.black87,  // Set the background color to black
+        backgroundColor: Colors.black87,
         iconTheme: const IconThemeData(
-          color: Colors.white,  // Set the back arrow icon color to white
+          color: Colors.white,
         ),
       ),
 
-      body: SingleChildScrollView( // Add this to make the entire body scrollable
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Header Text
             const Text(
               "We’re here to help solve any queries you have regarding Meditation",
               style: TextStyle(
@@ -121,7 +117,6 @@ class _FAQScreenState extends State<FAQScreen> {
             ),
             const SizedBox(height: 16),
 
-            // Search Bar
             TextField(
               controller: _searchController,
               decoration: InputDecoration(
@@ -134,7 +129,6 @@ class _FAQScreenState extends State<FAQScreen> {
             ),
             const SizedBox(height: 16),
 
-            // FAQ Section
             const Text(
               "FAQ",
               style: TextStyle(
@@ -146,12 +140,12 @@ class _FAQScreenState extends State<FAQScreen> {
 
             // FAQ ListView
             SizedBox(
-              height: 350,  // Set a max height that can be adjusted for larger screens
+              height: 350,
               child: ListView(
                 children: filteredFaqData.isEmpty
                     ? [const Center(child: Text("No results found"))]
                     : filteredFaqData
-                    .asMap() // Convert the list to a map with index
+                    .asMap()
                     .map((index, faq) {
                   return MapEntry(
                     index,
@@ -175,7 +169,6 @@ class _FAQScreenState extends State<FAQScreen> {
         ),
       ),
 
-      // BottomNavigationBar with ValueListenableBuilder
       bottomNavigationBar: ValueListenableBuilder<int>(
         valueListenable: _bottomNavNotifier,
         builder: (context, selectedIndex, _) {
@@ -211,7 +204,6 @@ class _FAQScreenState extends State<FAQScreen> {
     );
   }
 
-  // Helper method to build the bottom navigation items
   BottomNavigationBarItem _buildBottomNavItem(IconData icon, String label, int index) {
     return BottomNavigationBarItem(
       icon: Icon(icon),
@@ -219,7 +211,6 @@ class _FAQScreenState extends State<FAQScreen> {
     );
   }
 
-  // Helper method to build FAQ tiles with rounded corners even when expanded
   Widget _buildFAQTile({required int index, required String question, required String answer}) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(12.0), // Apply rounded corners to the tile
@@ -244,9 +235,9 @@ class _FAQScreenState extends State<FAQScreen> {
                 ),
               ],
               onExpansionChanged: (isExpanded) {
-                _expandedTileNotifier.value = isExpanded ? index : -1; // Update expanded tile index
+                _expandedTileNotifier.value = isExpanded ? index : -1;
               },
-              initiallyExpanded: expandedIndex == index, // Expand this FAQ if it's the selected one
+              initiallyExpanded: expandedIndex == index,
             );
           },
         ),

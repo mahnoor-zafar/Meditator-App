@@ -39,15 +39,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     Text(
                       "Sign Up to Meditopia",
                   style: TextStyle(
-                    fontFamily: 'Ephesis',  // Use the font family name, not the file name
+                    fontFamily: 'Ephesis',
                     fontSize: 40,
                     fontWeight: FontWeight.bold,
-                    color: Colors.black,  // Set text color to black
+                    color: Colors.black,
                   ),
                     ),
                     SizedBox(height: 30),
 
-                    // Name Field
                     _buildTextField(
                       controller: _nameController,
                       label: "Name",
@@ -61,7 +60,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       },
                     ),
 
-                    // Email Field
                     _buildTextField(
                       controller: _emailController,
                       label: "Email",
@@ -77,7 +75,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       },
                     ),
 
-                    // Password Field
                     _buildTextField(
                       controller: _passwordController,
                       label: "Password",
@@ -94,7 +91,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       },
                     ),
 
-                    // Phone Number Field
                     _buildTextField(
                       controller: _phoneController,
                       label: "Phone Number",
@@ -112,7 +108,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     SizedBox(height: 20),
 
-                    // Sign Up Button
                     _isLoading
                         ? CircularProgressIndicator()
                         : ElevatedButton(
@@ -142,10 +137,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       },
                       child: Text(
                         "Already have an account? Login",
-                        style: GoogleFonts.redHatDisplay(  // Use the Red Hat Display font
-                          fontSize: 18,                    // Set font size
-                          fontWeight: FontWeight.w400,     // Set font weight
-                          color: Colors.black,             // Set font color
+                        style: GoogleFonts.redHatDisplay(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.black,
                         ),
                       ),
                     ),

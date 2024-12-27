@@ -9,7 +9,7 @@ class MeditationDetailScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Basics Meditation'),
         iconTheme: const IconThemeData(
-          color: Colors.black,  // Set the back arrow icon color to white
+          color: Colors.black,
         ),
       ),
       body: Padding(
@@ -49,7 +49,7 @@ class MeditationDetailScreen extends StatelessWidget {
             const SizedBox(height: 8),
             Expanded(
               child: ListView.builder(
-                itemCount: 17, // Number of sessions
+                itemCount: 5,
                 itemBuilder: (context, index) {
                   return ListTile(
                     leading: CircleAvatar(
@@ -64,7 +64,6 @@ class MeditationDetailScreen extends StatelessWidget {
                     trailing: IconButton(
                       icon: const Icon(Icons.play_arrow_outlined, color: Colors.black),
                       onPressed: () {
-                        // Action for playing session
                       },
                     ),
                   );

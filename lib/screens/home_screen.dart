@@ -49,7 +49,6 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Greeting Section with User's Name
               Text(
                 userName != null ? "Welcome Back, $userName!" : "Loading...",
                 style: const TextStyle(
@@ -62,15 +61,13 @@ class _HomeScreenState extends State<HomeScreen> {
                Text(
                 'How are you feeling today?',
                 style: GoogleFonts.redHatDisplay(
-                  fontSize: 30,            // Adjust the font size
-                    // Set the desired weight (e.g., bold)
-                  color: Colors.black,         // Set the text color
+                  fontSize: 30,
+                  color: Colors.black,
                 ),
               ),
 
               const SizedBox(height: 16),
 
-              // Meditation Card
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
@@ -81,10 +78,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     ClipOval(
                       child: Image.asset(
-                        'assets/main.jpg', // Replace with your asset
+                        'assets/main.jpg',
                         width: 100,
                         height: 100,
-                        fit: BoxFit.cover, // Optional, ensures the image covers the area fully
+                        fit: BoxFit.cover,
                       ),
                     ),
 
@@ -164,12 +161,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     _buildRecommendationCard(
                       title: "Happiness",
                       subtitle: "21 sessions",
-                      color: Colors.yellow[50]!,
+                      color: Color(0xFFF2F2F2),
                     ),
                     _buildRecommendationCard(
                       title: "Sweet Sleep",
                       subtitle: "15 sounds",
-                      color: Colors.blue[50]!,
+                      color: Color(0xFFAAAAAA),
                     ),
                     _buildRecommendationCard(
                       title: "Row Your Boat",
@@ -198,12 +195,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     _buildRecommendationCard(
                       title: "Basics",
                       subtitle: "5/17 sessions completed",
-                      color: Colors.red[50]!,
+                      color: Color(0xFFBDBDBD),
                     ),
                     _buildRecommendationCard(
                       title: "Happiness",
                       subtitle: "2/21 sessions completed",
-                      color: Colors.yellow[50]!,
+                      color: Color(0xFFDBDBD9),
                     ),
                   ],
                 ),
@@ -212,7 +209,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      // Bottom Navigation
       bottomNavigationBar: ValueListenableBuilder<int>(
         valueListenable: _notifier,
         builder: (context, selectedIndex, _) {
@@ -227,7 +223,7 @@ class _HomeScreenState extends State<HomeScreen> {
             selectedItemColor: Colors.grey,
             unselectedItemColor: Colors.black,
             onTap: (index) {
-              _notifier.value = index; // Update the selected index
+              _notifier.value = index;
               switch (index) {
                 case 0:
                   break;

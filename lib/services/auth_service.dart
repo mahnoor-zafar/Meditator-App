@@ -1,10 +1,8 @@
-// lib/services/auth_service.dart
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  // Sign Up Method
   Future<User?> signUp(String email, String password) async {
     try {
       final UserCredential userCredential =
@@ -19,7 +17,6 @@ class AuthService {
     }
   }
 
-  // Sign In Method
   Future<User?> signIn(String email, String password) async {
     try {
       final UserCredential userCredential =
@@ -34,12 +31,10 @@ class AuthService {
     }
   }
 
-  // Sign Out Method
   Future<void> signOut() async {
     await _auth.signOut();
   }
 
-  // Get current user
   User? getCurrentUser() {
     return _auth.currentUser;
   }

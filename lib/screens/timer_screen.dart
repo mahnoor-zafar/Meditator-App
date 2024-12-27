@@ -9,18 +9,16 @@ class TimerScreen extends StatefulWidget {
 }
 
 class _TimerScreenState extends State<TimerScreen> {
-  int _selectedIndex = 2;  // Timer screen is selected in the bottom nav
+  int _selectedIndex = 2;
   final ValueNotifier<int> _notifier = ValueNotifier<int>(2);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Meditation Timer'),
-      ),
+
       body: Center(
         child: Text(
-          'To be implemented', // Display the message in the center
+          'To be implemented',
           style: const TextStyle(
             fontSize: 24,
             color: Colors.black,
@@ -69,8 +67,8 @@ class _TimerScreenState extends State<TimerScreen> {
       ) {
     return BottomNavigationBarItem(
       icon: AnimatedScale(
-        scale: _selectedIndex == index ? 1.2 : 1.0, // Scale the icon when selected
-        duration: const Duration(milliseconds: 200), // Duration of the animation
+        scale: _selectedIndex == index ? 1.2 : 1.0,
+        duration: const Duration(milliseconds: 200),
         child: Icon(icon),
       ),
       label: label,

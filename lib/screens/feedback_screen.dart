@@ -17,10 +17,9 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
   @override
   void initState() {
     super.initState();
-    _loadFeedbackData(); // Load saved feedback when the screen initializes
+    _loadFeedbackData();
   }
 
-  // Load saved feedback from SharedPreferences
   Future<void> _loadFeedbackData() async {
     final prefs = await SharedPreferences.getInstance();
     setState(() {
@@ -31,11 +30,10 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
     });
   }
 
-  // Save the feedback data to SharedPreferences
   Future<void> _saveFeedbackData() async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setDouble('rating', _rating); // Save the rating
-    await prefs.setString('comment', _commentController.text); // Save the comment
+    await prefs.setDouble('rating', _rating);
+    await prefs.setString('comment', _commentController.text);
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('Feedback saved!')),
     );
@@ -58,7 +56,6 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
             ),
             const SizedBox(height: 16),
 
-            // Rating Input (using Slider or Star Rating)
             const Text("Rate us:"),
             Slider(
               value: _rating,
@@ -74,7 +71,6 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
             ),
             const SizedBox(height: 16),
 
-            // Text Input for Comments
             const Text("Your Feedback:"),
             TextField(
               controller: _commentController,
@@ -88,11 +84,10 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
             ),
             const SizedBox(height: 16),
 
-            // Save Button
             Center(
               child: ElevatedButton(
                 onPressed: () {
-                  _saveFeedbackData(); // Save the feedback data
+                  _saveFeedbackData();
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blue,

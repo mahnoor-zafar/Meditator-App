@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart'; // Import Firestore
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:meditator_app/screens/faq_screen.dart';
 import 'package:meditator_app/screens/feedback_screen.dart';
@@ -22,7 +22,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
     super.initState();
     final user = FirebaseAuth.instance.currentUser;
     if (user != null) {
-      // Fetch user data from Firestore based on the current user UID
       _userData = FirebaseFirestore.instance.collection('users').doc(user.uid).get();
     }
   }
@@ -50,9 +49,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ],
             ),
 
-            // Profile Text at the Top
             const Padding(
-              padding: EdgeInsets.only(top: 20),
+              padding: EdgeInsets.only(top: 1),
               child: Text(
                 'Profile',
                 style: TextStyle(
@@ -63,9 +61,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
 
-            const SizedBox(height: 20), // Space between profile text and profile details
-
-            // Profile Picture and Details
+            const SizedBox(height: 20),
             FutureBuilder<DocumentSnapshot>(
               future: _userData,
               builder: (context, snapshot) {
@@ -85,18 +81,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                 return Column(
                   children: [
-                    // Profile Picture
                     Center(
                       child: CircleAvatar(
                         radius: 50,
-                        backgroundImage: user?.photoURL != null
-                            ? NetworkImage(user!.photoURL!) // Load user's profile picture
-                            : const AssetImage('assets/default_avatar.png') as ImageProvider,
+                        backgroundImage:  const AssetImage('assets/default_avatar.png') as ImageProvider,
                       ),
                     ),
-                    const SizedBox(height: 20), // Space between picture and name
+                    const SizedBox(height: 20),
 
-                    // Name
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -110,8 +102,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                     const SizedBox(height: 10),
 
-
-                    // Phone
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -141,13 +131,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ElevatedButton.icon(
                       style: ElevatedButton.styleFrom(
                         minimumSize: const Size(double.infinity, 50),
-                        backgroundColor: Colors.black54, // Use backgroundColor instead of primary
+                        backgroundColor: Colors.black54,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(25),
                         ),
                       ),
                       onPressed: () {
-                        // Navigate to an Edit Profile Screen (if implemented)
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(content: Text('Edit Profile not implemented')),
                         );
@@ -161,17 +150,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     const SizedBox(height: 10),
                     ElevatedButton.icon(
                       style: ElevatedButton.styleFrom(
-                        minimumSize: const Size(double.infinity, 50), // Make the button wide
-                        backgroundColor: Colors.black54, // Set the background color
+                        minimumSize: const Size(double.infinity, 50),
+                        backgroundColor: Colors.black54,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25), // Rounded corners
+                          borderRadius: BorderRadius.circular(25),
                         ),
                       ),
                       onPressed: () {
-                        // Navigate to FAQ Screen
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => FeedbackScreen()),
+                          MaterialPageRoute(builder: (context) => FAQScreen()),
                         );
                       },
                       icon: const Icon(Icons.question_answer, color: Colors.white), // Icon for FAQ
@@ -183,20 +171,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     const SizedBox(height: 10),
                     ElevatedButton.icon(
                       style: ElevatedButton.styleFrom(
-                        minimumSize: const Size(double.infinity, 50), // Make the button wide
-                        backgroundColor: Colors.black54, // Set the background color
+                        minimumSize: const Size(double.infinity, 50),
+                        backgroundColor: Colors.black54,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25), // Rounded corners
+                          borderRadius: BorderRadius.circular(25),
                         ),
                       ),
                       onPressed: () {
-                        // Navigate to FAQ Screen
                         Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) => FAQScreen()),
                         );
                       },
-                      icon: const Icon(Icons.question_answer, color: Colors.white), // Icon for FAQ
+                      icon: const Icon(Icons.question_answer, color: Colors.white),
                       label: const Text(
                         'Frequently Asked Questions',
                         style: TextStyle(fontSize: 16, color: Colors.white),
@@ -206,7 +193,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ElevatedButton.icon(
                       style: ElevatedButton.styleFrom(
                         minimumSize: const Size(double.infinity, 50),
-                        backgroundColor: Colors.black54, // Use backgroundColor instead of primary
+                        backgroundColor: Colors.black54,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(25),
                         ),
@@ -244,8 +231,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             selectedItemColor: Colors.orange,
             unselectedItemColor: Colors.black,
             onTap: (index) {
-              _notifier.value = index; // Update the selected index
-              // Handle navigation based on the index
+              _notifier.value = index;
               switch (index) {
                 case 0:
                   Navigator.pushNamed(context, '/home');
@@ -273,8 +259,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ) {
     return BottomNavigationBarItem(
       icon: AnimatedScale(
-        scale: _selectedIndex == index ? 1.2 : 1.0, // Scale the icon when selected
-        duration: const Duration(milliseconds: 200), // Duration of the animation
+        scale: _selectedIndex == index ? 1.2 : 1.0,
+        duration: const Duration(milliseconds: 200),
         child: Icon(icon),
       ),
       label: label,
