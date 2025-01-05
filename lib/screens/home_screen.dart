@@ -162,11 +162,27 @@ class _HomeScreenState extends State<HomeScreen> {
                       title: "Happiness",
                       subtitle: "21 sessions",
                       color: Color(0xFFF2F2F2),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const MeditationDetailScreen(),
+                          ),
+                        );
+                      },
                     ),
                     _buildRecommendationCard(
                       title: "Sweet Sleep",
                       subtitle: "15 sounds",
                       color: Color(0xFFAAAAAA),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const MeditationDetailScreen(),
+                          ),
+                        );
+                      },
                     ),
                     _buildRecommendationCard(
                       title: "Row Your Boat",

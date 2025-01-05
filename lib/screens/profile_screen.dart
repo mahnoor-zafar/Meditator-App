@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:meditator_app/screens/faq_screen.dart';
 import 'package:meditator_app/screens/feedback_screen.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -31,7 +32,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final user = FirebaseAuth.instance.currentUser;
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xFFDBDCD7),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -49,14 +50,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ],
             ),
 
-            const Padding(
+             Padding(
               padding: EdgeInsets.only(top: 1),
               child: Text(
                 'Profile',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
+                style: GoogleFonts.redHatDisplay(
+                  fontSize: 30,
                   color: Colors.black,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),
@@ -228,7 +229,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               _buildBottomNavItem(FontAwesomeIcons.bookAtlas, 'Timer', 2),
               _buildBottomNavItem(FontAwesomeIcons.userCircle, 'Profile', 3),
             ],
-            selectedItemColor: Colors.orange,
+            selectedItemColor: Colors.grey,
             unselectedItemColor: Colors.black,
             onTap: (index) {
               _notifier.value = index;

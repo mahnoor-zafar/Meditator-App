@@ -36,6 +36,10 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // Get the screen size using MediaQuery
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
@@ -45,21 +49,20 @@ class _SplashScreenState extends State<SplashScreen> {
           children: [
             Image.asset(
               'assets/main1.jpg',
-              width: 400,
-              height: 400,
+              width: screenWidth * 0.8,
+              height: screenHeight * 0.4,
             ),
-            SizedBox(height: 20),
+            SizedBox(height: screenHeight * 0.05),
             Padding(
-              padding: const EdgeInsets.only(bottom: 30),
+              padding: EdgeInsets.only(bottom: screenHeight * 0.05),
               child: Text(
                 'Meditopia',
                 style: TextStyle(
                   fontFamily: 'Ephesis',
-                  fontSize: 70,
+                  fontSize: screenWidth * 0.15,
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
                 ),
-
               ),
             ),
           ],

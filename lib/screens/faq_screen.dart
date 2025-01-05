@@ -85,16 +85,13 @@ class _FAQScreenState extends State<FAQScreen> {
         .toList();
 
     return Scaffold(
-      appBar: AppBar (
-        title: const Text(
-          "Frequently Asked Questions",
-          style: TextStyle(
-            color: Colors.white,
+      appBar: AppBar(
+        title: Text(
+          'Frequently Asked Questions',
+          style: GoogleFonts.redHatDisplay(
+            fontSize: 23,
+            fontWeight: FontWeight.bold,
           ),
-        ),
-        backgroundColor: Colors.black87,
-        iconTheme: const IconThemeData(
-          color: Colors.white,
         ),
       ),
 

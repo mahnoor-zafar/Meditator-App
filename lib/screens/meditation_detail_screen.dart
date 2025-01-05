@@ -1,4 +1,6 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class MeditationDetailScreen extends StatelessWidget {
   const MeditationDetailScreen({Key? key}) : super(key: key);
@@ -7,7 +9,7 @@ class MeditationDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Basics Meditation'),
+        title: const Text(''),
         iconTheme: const IconThemeData(
           color: Colors.black,
         ),
@@ -17,7 +19,6 @@ class MeditationDetailScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Header Image
             Container(
               height: 200,
               width: double.infinity,
@@ -30,7 +31,6 @@ class MeditationDetailScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
-            // Title and Description
             const Text(
               "Basics Meditation",
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
@@ -41,7 +41,6 @@ class MeditationDetailScreen extends StatelessWidget {
               style: TextStyle(fontSize: 16, color: Colors.grey),
             ),
             const SizedBox(height: 16),
-            // Session List
             const Text(
               "Sessions",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -64,6 +63,12 @@ class MeditationDetailScreen extends StatelessWidget {
                     trailing: IconButton(
                       icon: const Icon(Icons.play_arrow_outlined, color: Colors.black),
                       onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return TimerDialog(sessionMinutes: 1);
+                          },
+                        );
                       },
                     ),
                   );
@@ -73,6 +78,120 @@ class MeditationDetailScreen extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class TimerDialog extends StatefulWidget {
+  final int sessionMinutes;
+
+  const TimerDialog({Key? key, required this.sessionMinutes}) : super(key: key);
+
+  @override
+  _TimerDialogState createState() => _TimerDialogState();
+}
+
+class _TimerDialogState extends State<TimerDialog> {
+  late int remainingTime;
+  late Timer _timer;
+  late AudioPlayer _audioPlayer;
+  late double progress;
+
+  @override
+  void initState() {
+    super.initState();
+    remainingTime = widget.sessionMinutes * 60;
+    progress = 0.0;
+    _audioPlayer = AudioPlayer();
+    _startSession();
+  }
+
+  void _startSession() async {
+    await _audioPlayer.play(AssetSource('sound/tune.mp3')); // Updated to correct usage
+    _startTimer();
+  }
+
+  void _startTimer() {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      setState(() {
+        if (remainingTime > 0) {
+          remainingTime--;
+          progress = 1 - (remainingTime / (widget.sessionMinutes * 60));
+        } else {
+          _endSession();
+        }
+      });
+    });
+  }
+
+  void _endSession() async {
+    _timer.cancel();
+    await _audioPlayer.stop();
+    _showCompletionDialog();
+  }
+
+  void _showCompletionDialog() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text("Congratulations!"),
+          content: const Text("You have completed the session."),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context); // Close completion dialog
+                Navigator.pop(context); // Close timer dialog
+              },
+              child: const Text("OK"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    _audioPlayer.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    String minutes = (remainingTime ~/ 60).toString().padLeft(2, '0');
+    String seconds = (remainingTime % 60).toString().padLeft(2, '0');
+
+    return AlertDialog(
+      title: const Text('Meditation Timer'),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          LinearProgressIndicator(
+            value: progress,
+            backgroundColor: Colors.grey[300],
+            color: Colors.blue,
+          ),
+          const SizedBox(height: 16),
+          Text(
+            '$minutes:$seconds',
+            style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 16),
+          const Text('Session in progress. Focus and relax.'),
+        ],
+      ),
+      actions: [
+        TextButton(
+          onPressed: () {
+            _timer.cancel();
+            _audioPlayer.stop();
+            Navigator.pop(context); // Close the dialog
+          },
+          child: const Text('Close'),
+        ),
+      ],
     );
   }
 }
