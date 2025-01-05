@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:meditator_app/screens/meditation_detail_screen.dart';
-import 'package:meditator_app/screens/meditation_guide_screen.dart';
-import 'package:meditator_app/screens/profile_screen.dart';
-import 'package:meditator_app/screens/timer_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -147,7 +144,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     _buildRecommendationCard(
                       title: "Basics",
-                      subtitle: "17 sessions",
+                      subtitle: "5 sessions",
                       color: Color(0xFFDBDBD9),
                       onTap: () {
                         Navigator.push(
@@ -187,7 +184,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     _buildRecommendationCard(
                       title: "Row Your Boat",
                       subtitle: "10 sounds",
-                      color: Colors.orange[50]!,
+                      color: Colors.grey,
                     ),
                   ],
                 ),

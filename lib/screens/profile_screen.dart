@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:meditator_app/screens/faq_screen.dart';
-import 'package:meditator_app/screens/feedback_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -32,7 +31,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final user = FirebaseAuth.instance.currentUser;
 
     return Scaffold(
-      backgroundColor: Color(0xFFDBDCD7),
+      backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -85,7 +84,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     Center(
                       child: CircleAvatar(
                         radius: 50,
-                        backgroundImage:  const AssetImage('assets/default_avatar.png') as ImageProvider,
+                        backgroundImage:  const AssetImage('assets/profile.jpg') as ImageProvider,
                       ),
                     ),
                     const SizedBox(height: 20),

@@ -75,7 +75,7 @@ flutter:
     - assets/animations/meditator.json
     - assets/animations/User.json
     - assets/animations/Home Button.json
-    - assets/default_avatar.png
+    - assets/profile.jpg
     - assets/main.jpg
     - assets/main1.jpg
     - assets/home.jpg

@@ -22,7 +22,6 @@ class _TimerScreenState extends State<TimerScreen> {
     _loadJournalEntries();
   }
 
-  // Load journal entries from SharedPreferences
   void _loadJournalEntries() async {
     final prefs = await SharedPreferences.getInstance();
     final String? savedEntries = prefs.getString('journalEntries');
@@ -33,13 +32,11 @@ class _TimerScreenState extends State<TimerScreen> {
     }
   }
 
-  // Save journal entries to SharedPreferences
   void _saveJournalEntries() async {
     final prefs = await SharedPreferences.getInstance();
     prefs.setString('journalEntries', jsonEncode(_journalEntries));
   }
 
-  // Show dialog to add a new journal entry
   void _showAddJournalDialog() {
     final _formKey = GlobalKey<FormState>();
     double mood = 5.0;
@@ -57,7 +54,6 @@ class _TimerScreenState extends State<TimerScreen> {
               key: _formKey,
               child: Column(
                 children: [
-                  // Mood Picker (Slider)
                   const Text("How is your mood? (1-10)", style: TextStyle(fontSize: 16)),
                   Slider(
                     value: mood,
@@ -72,7 +68,6 @@ class _TimerScreenState extends State<TimerScreen> {
                     },
                   ),
                   const SizedBox(height: 16),
-                  // Date Picker
                   Row(
                     children: [
                       const Text("Date: ", style: TextStyle(fontSize: 16)),
@@ -98,9 +93,7 @@ class _TimerScreenState extends State<TimerScreen> {
                     ],
                   ),
                   const SizedBox(height: 16),
-                  // Topic Name
                   _buildTextField("Topic Name", _topicController),
-                  // Journal Entry
                   _buildTextField("Your Thoughts", _entryController, multiline: true),
                 ],
               ),
@@ -122,8 +115,8 @@ class _TimerScreenState extends State<TimerScreen> {
                       "entry": _entryController.text,
                     });
                   });
-                  _saveJournalEntries(); // Save to SharedPreferences
-                  Navigator.pop(context); // Close dialog
+                  _saveJournalEntries();
+                  Navigator.pop(context);
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text("Journal entry added successfully!")),
                   );
@@ -137,7 +130,6 @@ class _TimerScreenState extends State<TimerScreen> {
     );
   }
 
-  // Show journal details in a dialog
   void _showJournalDetails(Map<String, dynamic> entry) {
     showDialog(
       context: context,

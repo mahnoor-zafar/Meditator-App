@@ -62,7 +62,6 @@ class _MeditationGuideScreenState extends State<MeditationGuideScreen> {
                           title: Text(category['name'], style: TextStyle(fontWeight: FontWeight.bold)),
                           subtitle: Text('${category['focus']} - ${category['minutes']} minutes'),
                           onTap: () {
-                            // Show dialog with detailed information
                             showDialog(
                               context: context,
                               builder: (context) {

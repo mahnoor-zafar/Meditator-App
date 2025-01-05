@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 import 'package:meditator_app/screens/home_screen.dart';
 import 'package:meditator_app/screens/login_screen.dart';
 import 'package:meditator_app/services/auth_service.dart';

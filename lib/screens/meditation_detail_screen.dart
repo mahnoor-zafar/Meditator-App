@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class MeditationDetailScreen extends StatelessWidget {
   const MeditationDetailScreen({Key? key}) : super(key: key);
@@ -9,10 +10,13 @@ class MeditationDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(''),
-        iconTheme: const IconThemeData(
-          color: Colors.black,
-        ),
+          title:Text(
+            'Basics Meditation',
+            style: GoogleFonts.redHatDisplay(
+              fontSize: 30,
+              fontWeight: FontWeight.bold,
+            ),
+          )
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -107,7 +111,7 @@ class _TimerDialogState extends State<TimerDialog> {
   }
 
   void _startSession() async {
-    await _audioPlayer.play(AssetSource('sound/tune.mp3')); // Updated to correct usage
+    await _audioPlayer.play(AssetSource('sound/tune.mp3'));
     _startTimer();
   }
 

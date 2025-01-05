@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
         'FAQ' : (context) => FAQScreen(),
       },
       onUnknownRoute: (settings) {
-        return MaterialPageRoute(builder: (context) => LoginScreen());
+        return MaterialPageRoute(builder: (context) => HomeScreen());
       },
     );
   }
